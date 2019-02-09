@@ -1,0 +1,136 @@
+.container-title {
+	display: flex;
+	justify-content: center;
+	border: solid 2px;
+	margin-left: 400px;
+	margin-right: 400px;
+	border-radius: 20px;
+
+}
+
+.container-view-or-take {
+	display: flex;
+	justify-content: center;
+	margin-top: 50px;
+}
+
+.divider {
+	width: 10px;
+	height: auto;
+	display: inline-block;
+}
+
+.btn-view-student {
+	width: 250px;
+	padding: 16px 16px;
+	font-size: 32px;
+	border-radius: 20px;
+}
+
+.btn-take-notes {
+	width: 250px;
+	padding: 16px 16px;
+	font-size: 32px;
+	border-radius: 20px;
+}
+
+.container-select-student {
+	display: flex;
+	visibility: hidden;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	margin-top: 40px;
+}
+
+.dropdown-content {
+	display: flex;
+	flex-direction: column;
+	visibility: hidden;
+}
+
+.btn-select-student {
+	width: 250px;
+	padding: 10px 10px;
+	font-size: 24px;
+}
+
+.btn-select-student:hover, .btn-select-student:focus {
+	background-color: #2980B9;
+}
+
+.dropdown-content a {
+	color: black;
+	padding: 4px;
+	text-decoration: none;
+	display: block;
+}
+
+.dropdown-content a:hover {background-color: #ddd}
+
+.show-students {display:block;}
+
+.container-workspace {
+	display: flex;
+	justify-content: center;
+	
+}
+
+.container-view-notes {
+	display: flex;
+	flex-direction: column;
+/*	margin-left: 200px;*/
+	height: 350px;
+	width: 500px;
+	border: solid 3px;
+	border-radius: 5px;
+}
+
+.container-notes {
+	display: flex;
+	flex-direction: column;
+/*	margin-left: 200px;*/
+	height: 350px;
+	width: 500px;
+	border: solid 3px;
+	border-radius: 5px;
+}
+
+.container-notes-title {
+	display: flex;
+	margin-left: 5px;
+}
+
+.container-form {
+	display: flex;
+	flex-direction: column;
+	margin-top: 5px;
+	width: 100px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

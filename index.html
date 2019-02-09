@@ -10,23 +10,53 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.9.1/underscore-min.js"></script>
   <script src="app/app.js"></script>
   <link rel="stylesheet" href="css/style.css">
-
-
-  <!--
-
-√ create container
-√ create button
-√ input field
-√ container to display text
-√ update button(or maybe click on the container item)
-√ delete button
-container for the response-feedback (start with alert)
--->
 </head>
 <body>
 
 <div class="container-main">
-  <header>My Cruddy App</header>
+  <div class="container-title">
+  <header><h1>Dr. Suzuki's Violin Studio</h1></header>
+  </div>
+  <div class="container-view-or-take">
+    <button class="btn-view-student">View Student</button>
+    <div class="divider"></div>
+    <button class="btn-take-notes">Take Notes</button>
+  </div>
+  <div class="container-select-student">
+    <button class="btn-select-student">Select student</button>
+    <div class="dropdown-content">
+      <a href="#">Student 1</a>
+      <a href="#">Student 2</a>
+      <a href="#">Student 3</a>
+    </div>
+  </div>
+  <div class="container-workspace">
+    <div class="container-view-notes">
+    </div>
+    <div class="divider"></div>
+    <div class="container-notes">
+      <div class="container-notes-title">
+        <div class="notes-title">Today's Lesson</div>
+      </div>
+      <div class="container-form">
+        <input type="text" class="input-key" placeholder="student name">
+        <input type="text" class="input-value" placeholder="notes">
+        <button class="btn-add">Submit</button>
+        <button class="btn-update">Update</button>
+        <button class="btn-delete">Delete</button>
+        <button class="btn-clear">Clear</button>
+      </div>
+      <div class="notes-data"></div>
+    </div>
+  </div>
+</div>
+</body>
+</html>
+
+<!-- <div class="container-main">
+  <div class="container-title">
+  <header><h1>Dr. Suzuki's Violin Studio</h1></header>
+  </div>
   <div class="container-form">
     <input type="text" class="input-key" placeholder="enter key">
     <input type="text" class="input-value" placeholder="enter value">
@@ -39,4 +69,4 @@ container for the response-feedback (start with alert)
 </div>
 
 </body>
-</html>
+</html> -->
