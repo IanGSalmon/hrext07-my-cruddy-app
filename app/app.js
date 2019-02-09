@@ -50,6 +50,7 @@ $(document).ready(function(){
     console.log(e);
     var keyData = $('.input-key').val();
     var valueData = $('.input-value').val();
+    console.log(keyData);
     // write to db
     localStorage.setItem(keyData, valueData);
     // read from db
@@ -59,9 +60,15 @@ $(document).ready(function(){
     // <div class="display-data-item" data-keyValue="keyData">valueData</div>
     // if you use backticks ` you can use ${templateLiterals}
     // TODO make this vars make sense across the app
-    $('.container-data').html('<div class="display-data-item" data-keyValue="'+ keyData +'">'+valueData+'</div>');
+    $('.notes-data').append('<div class="display-data-item" data-keyValue="'+ keyData +'">'+keyData+"&nbsp&nbsp&nbsp"+valueData+'</div>');
+    $('.dropdown-content').append('<a href="#">' + keyData + '</a>');
     $('.input-key').val('');
     $('.input-value').val('');
+
+    // add to viewing area
+    // $(".notes-data").html('');
+    // $(".container-view-notes").append()
+
   });
 
 
@@ -69,16 +76,17 @@ $(document).ready(function(){
     // need to expand when  more than 1 item is added
 
   // delete item
-  $('.container-data').on('click', '.display-data-item', function(e){
-    console.log(e.currentTarget.dataset.keyvalue);
-    var keyData = e.currentTarget.dataset.keyvalue;
-    localStorage.removeItem(keyData);
-    $('.container-data').text('');
-  });
+  // $('.container-data').on('click', '.display-data-item', function(e){
+  //   console.log(e.currentTarget.dataset.keyvalue);
+  //   var keyData = e.currentTarget.dataset.keyvalue;
+  //   localStorage.removeItem(keyData);
+  //   $('.container-data').text('');
+  // });
+
   // delete all?
   $('.btn-clear').click(function(){
     localStorage.clear();
-    $('.container-data').text('');
+    $('.notes-data').text('');
   });
 
 });

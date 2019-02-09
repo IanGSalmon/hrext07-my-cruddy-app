@@ -73,7 +73,8 @@
 .container-workspace {
 	display: flex;
 	justify-content: center;
-	
+	margin-top: 20px;
+
 }
 
 .container-view-notes {
