@@ -69,7 +69,7 @@
 	background-color: #2980B9;
 }
 
-.btn-data-item:hover, .btn-data-item:focus {
+.btn-del-item:hover, .btn-del-item:focus {
 	background-color: #2980B9;
 }
 
@@ -118,6 +118,19 @@
 	font-color: red;
 }
 
+.btn-cancel-note {
+	display: flex;
+	margin-top: 100px;
+	border-radius: 3px;
+}
+
+.btn-confirm-cancel {
+	margin-top: 3px;
+	border: 2px solid;
+	background-color: #FF5733;
+	font-size: 24px;
+	height: 45px;
+}
 
 
 

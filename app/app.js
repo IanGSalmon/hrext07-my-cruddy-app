@@ -17,13 +17,93 @@ $(document).ready(function(){
   //   }
   // }
 
+  var deleteLesson = function(key, date) {
+    var copyNotesObj = JSON.parse(localStorage[key]);
+    delete copyNotesObj[date];
+    // console.log(typeof key);
+    localStorage.setItem(key, JSON.stringify(copyNotesObj));
+    createView(null, key);
+  }
+
+  var createDropdownButtons = function() {
+    $('.dropdown-content').html('');
+    Object.keys(localStorage).forEach(key => {
+      $('.dropdown-content').append('<button class="btn-dropdown-name">' + key + '</button>&nbsp&nbsp');
+    })
+  }
+
+  var createView = function(event, keyData, displayText) {
+    var keyData = keyData || event.innerText;
+    var displayText = displayText || JSON.parse(localStorage.getItem(keyData));
+
+    $('.notes-data').html('');
+    $('.notes-data').append('<div class="display-data-name">' + keyData + '</div><br>');
+
+    Object.keys(displayText).forEach(key => {
+      $('.notes-data').append('<div class="display-data-item">' + key + JSON.stringify(displayText[key]) + '</div>');
+    })
+  }
+
+  var createButtonViewDelete = function() {
+    var keyData = $('.display-data-name').text();
+    var displayText = JSON.parse(localStorage.getItem(keyData));
+
+    $('.notes-data').html('');
+    $('.notes-data').append('<div class="delete-warning"><font color="red">Select which lesson you would like to delete</font></div><br>');
+    $('.notes-data').append('<div class="display-data-name">Student:&nbsp' + keyData + '</div><br>');
+
+    Object.keys(displayText).forEach(key => {
+      $('.notes-data').append('<div><button class="btn-del-item">' + key +':&nbsp&nbsp' + JSON.stringify(displayText[key]) + '</button></div>');
+    })
+  }
+
+  var createButtonViewUpdate = function() {
+    var keyData = $('.display-data-name').text();
+    var displayText = JSON.parse(localStorage.getItem(keyData));
+
+    $('.notes-data').html('');
+    $('.notes-data').append('<div class="update-notification"><font color="blue">Select which lesson you would like to update</font></div><br>');
+    $('.notes-data').append('<div class="display-data-name">Student:&nbsp' + keyData + '</div><br>');
+
+    Object.keys(displayText).forEach(key => {
+      $('.notes-data').append('<div><button class="btn-update-item">' + key +':&nbsp&nbsp' + JSON.stringify(displayText[key]) + '</button></div>');
+    })
+  }
+
+  var createLessonForm = function() {
+    $('.container-workspace').prepend('<div class="container-notes"><div class="container-notes-title"><div class="notes-title">Take Notes Here</div></div><div class="container-form"><input type="text" class="input-name" placeholder="name"><input type="text" class="input-date" placeholder="date"><input type="text" class="input-instrument" placeholder="instrument"><input type="text" class="input-piece" placeholder="piece"><button class="btn-add">Submit</button><button class="btn-update">Update</button><button class="btn-delete">Delete</button><button class="btn-clear">Clear</button><button class="btn-cancel-note">Cancel this note</button></div></div>');
+  }
+
+  var clearForm = function() {
+    $('.input-name').val('');
+    $('.input-date').val('');
+    $('.input-instrument').val('');
+    $('.input-piece').val('');
+  }
+
+  var createNotesView = function() {
+    $('.container-workspace').append('<div class="container-view-notes"><div class="notes-data">Select "View Student" or "Take Notes" to begin!</div></div>');
+  }
+
+  var addDividerEnd = function() {
+    $('.container-workspace').append('<div class="divider"></div>');
+  }
+
+  var addDividerBegin = function(){
+    $('.container-workspace').prepend('<div class="divider"></div>');
+  }
 
   $(".btn-take-notes").on('click', function() {
     if ($(".container-select-student").css("visibility") === "hidden") {
       $(".container-select-student").css("visibility", "visible");
     } else {
       $(".container-select-student").css("visibility", "hidden");
+      $(".dropdown-content").css('visibility', 'hidden');
     }
+
+    $('.notes-data').text('');
+    addDividerBegin();
+    createLessonForm();
   });
 
   $(".btn-view-student").on('click', function() {
@@ -43,52 +123,27 @@ $(document).ready(function(){
     }
   })
 
-
-
-  $('.btn-delete').on('click', function() {
-    // re-build viewing area, but dates are buttons
-    // click date to delete item
-    createButtonView();
+  $('.dropdown-content').on('click', 'button', function(e) {
+    var student = e.currentTarget;
+    createView(student);
   })
 
-  $('.notes-data').on('click', 'button', function(e) {
-    // find person to use as key
+  $('.notes-data').on('click', '.btn-del-item', function(e) {
     var nameText = $('.display-data-name').text();
     var name = nameText.slice(9);
-
-    // find date to delete
     var buttonText = e.currentTarget.innerText;
     var splitText = buttonText.split(':');
     var dateToDel = splitText[0];
 
-    console.log(name);
     deleteLesson(name, dateToDel);
   })
 
-  var deleteLesson = function(key, date) {
-    var copyNotesObj = JSON.parse(localStorage[key]);
-    delete copyNotesObj[date];
-    // console.log(typeof key);
-    localStorage.setItem(key, JSON.stringify(copyNotesObj));
-    createView(null, key);
-  }
+  $('.notes-data').on('click', '.btn-update-item', function(e) {
+    console.log('updating');
+  })
 
-  var createButtonView = function() {
-    var keyData = $('.display-data-name').text();
-    
-    var displayText = JSON.parse(localStorage.getItem(keyData));
-    console.log(displayText);
 
-    $('.notes-data').html('');
-    $('.notes-data').append('<div class="delete-warning"><font color="red">Select which lesson you would like to delete</font></div><br>');
-    $('.notes-data').append('<div class="display-data-name">Student:&nbsp' + keyData + '</div><br>');
-
-    Object.keys(displayText).forEach(key => {
-      $('.notes-data').append('<div><button class="btn-data-item">' + key +':&nbsp&nbsp' + JSON.stringify(displayText[key]) + '</button></div>');
-    })
-  }
-
-  $('.btn-add').on('click', function(e){
+  $('.container-main').on('click', '.btn-add', function(e){
     var keyData = $('.input-name').val();
     var date = $('.input-date').val();
     var valueData = {  
@@ -115,42 +170,28 @@ $(document).ready(function(){
 
   });
 
-
-  $('.dropdown-content').on('click', 'button', function(e) {
-    var student = e.currentTarget;
-    createView(student);
-  })
-
-  $('.btn-clear').click(function(){
+  $('.container-main').on('click', '.btn-clear', function(){
     localStorage.clear();
     $('.container-data').text('');
   });
 
-  var createDropdownButtons = function() {
-    $('.dropdown-content').html('');
-    Object.keys(localStorage).forEach(key => {
-      $('.dropdown-content').append('<button class="btn-dropdown-name">' + key + '</button>&nbsp&nbsp');
-    })
-  }
+  $('.container-main').on('click','.btn-update', function(e) {
+    createButtonViewUpdate();
+  });
 
-  var createView = function(event, keyData, displayText) {
-    var keyData = keyData || event.innerText;
-    var displayText = displayText || JSON.parse(localStorage.getItem(keyData));
+  $('.container-main').on('click','.btn-delete', function(e) {
+    createButtonViewDelete();
+  })
 
-    $('.notes-data').html('');
-    $('.notes-data').append('<div class="display-data-name">' + keyData + '</div><br>');
+  $('.container-main').on('click', '.btn-cancel-note', function(e) {
+    $('.container-notes').append('<button class="btn-confirm-cancel">Are you sure?</button>');
+  })
 
-    Object.keys(displayText).forEach(key => {
-      $('.notes-data').append('<div class="display-data-item">' + key + JSON.stringify(displayText[key]) + '</div>');
-    })
-  }
+  $('.container-main').on('click', '.btn-confirm-cancel', function(e) {
+    $('.container-workspace').html('');
+    createNotesView();
+  })
 
-  var clearForm = function() {
-    $('.input-name').val('');
-    $('.input-date').val('');
-    $('.input-instrument').val('');
-    $('.input-piece').val('');
-  }
 
 
   // update db
@@ -165,7 +206,9 @@ $(document).ready(function(){
   // });
 
   // delete all?
+  createNotesView();
   createDropdownButtons();
+
 
 });
 
