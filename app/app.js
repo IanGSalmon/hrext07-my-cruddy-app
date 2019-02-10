@@ -17,6 +17,7 @@ $(document).ready(function(){
   //   }
   // }
 
+
   $(".btn-take-notes").on('click', function() {
     if ($(".container-select-student").css("visibility") === "hidden") {
       $(".container-select-student").css("visibility", "visible");
@@ -30,9 +31,9 @@ $(document).ready(function(){
       $(".container-select-student").css("visibility", "visible");
     } else {
       $(".container-select-student").css("visibility", "hidden");
+      $(".dropdown-content").css('visibility', 'hidden');
     }
   });
-
   
   $(".btn-select-student").on('click', function() {
     if ($(".dropdown-content").css("visibility") === "hidden") {
@@ -40,36 +41,91 @@ $(document).ready(function(){
     } else {
       $(".dropdown-content").css('visibility', 'hidden');
     }
+  })
+
+  $('.btn-delete').on('click', function() {
+    // re-build viewing area, but dates are buttons
+    // click date to delete item
+    createButtonView();
 
   })
 
-  //var keyData = 'ourKey'; // going to need to make this dynamic?
+  var createButtonView = function() {
+    var keyData = $('.display-data-name');
+    console.log(keyData.innerHTML);
+    // var displayText = displayText || JSON.parse(localStorage.getItem(keyData));
 
+    // $('.notes-data').html('');
+    // $('.notes-data').append('<div class="display-data-name">' + keyData + '</div><br>');
+
+    // Object.keys(displayText).forEach(key => {
+    //   $('.notes-data').append('<div class="display-data-item">' + key + JSON.stringify(displayText[key]) + '</div>');
+    // })
+  }
 
   $('.btn-add').on('click', function(e){
-    console.log(e);
-    var keyData = $('.input-key').val();
-    var valueData = $('.input-value').val();
-    console.log(keyData);
-    // write to db
-    localStorage.setItem(keyData, valueData);
-    // read from db
-    var displayText = keyData + ' | ' + localStorage.getItem(keyData);
-    // this only displays the last one? might want to switch to html
-    // and append a div
-    // <div class="display-data-item" data-keyValue="keyData">valueData</div>
-    // if you use backticks ` you can use ${templateLiterals}
-    // TODO make this vars make sense across the app
-    $('.notes-data').append('<div class="display-data-item" data-keyValue="'+ keyData +'">'+keyData+"&nbsp&nbsp&nbsp"+valueData+'</div>');
-    $('.dropdown-content').append('<a href="#">' + keyData + '</a>');
-    $('.input-key').val('');
-    $('.input-value').val('');
+    var keyData = $('.input-name').val();
+    var date = $('.input-date').val();
+    var valueData = {  
+        [date]: {
+                instrument: $('.input-instrument').val(),
+                piece: $('.input-piece').val()
+                },
+        };
 
-    // add to viewing area
-    // $(".notes-data").html('');
-    // $(".container-view-notes").append()
+    // write to db
+    if (localStorage[keyData]) {
+      var existingObj = JSON.parse(localStorage.getItem(keyData));
+      existingObj[date] = valueData[date];
+      localStorage.setItem(keyData, JSON.stringify(existingObj));
+    } else {
+      localStorage.setItem(keyData, JSON.stringify(valueData));
+    };
+    // read from db
+    var displayText = JSON.parse(localStorage.getItem(keyData));
+
+    createView(undefined, keyData, displayText);
+    createDropdownButtons();
+    clearForm();
 
   });
+
+
+  $('.dropdown-content').on('click', 'button', function(e) {
+    var student = e.currentTarget;
+    createView(student);
+  })
+
+  $('.btn-clear').click(function(){
+    localStorage.clear();
+    $('.container-data').text('');
+  });
+
+  var createDropdownButtons = function() {
+    $('.dropdown-content').html('');
+    Object.keys(localStorage).forEach(key => {
+      $('.dropdown-content').append('<button class="btn-dropdown-name">' + key + '</button>&nbsp&nbsp');
+    })
+  }
+
+  var createView = function(event, keyData, displayText) {
+    var keyData = keyData || event.innerText;
+    var displayText = displayText || JSON.parse(localStorage.getItem(keyData));
+
+    $('.notes-data').html('');
+    $('.notes-data').append('<div class="display-data-name">' + keyData + '</div><br>');
+
+    Object.keys(displayText).forEach(key => {
+      $('.notes-data').append('<div class="display-data-item">' + key + JSON.stringify(displayText[key]) + '</div>');
+    })
+  }
+
+  var clearForm = function() {
+    $('.input-name').val('');
+    $('.input-date').val('');
+    $('.input-instrument').val('');
+    $('.input-piece').val('');
+  }
 
 
   // update db
@@ -84,10 +140,7 @@ $(document).ready(function(){
   // });
 
   // delete all?
-  $('.btn-clear').click(function(){
-    localStorage.clear();
-    $('.notes-data').text('');
-  });
+
 
 });
 

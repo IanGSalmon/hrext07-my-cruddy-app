@@ -40,33 +40,34 @@
 	justify-content: center;
 	align-items: center;
 	flex-direction: column;
-	margin-top: 40px;
-}
-
-.dropdown-content {
-	display: flex;
-	flex-direction: column;
-	visibility: hidden;
+	margin-top: 30px;
 }
 
 .btn-select-student {
-	width: 250px;
-	padding: 10px 10px;
-	font-size: 24px;
+	width: 200px;
+	padding: 5px 5px;
+	font-size: 22px;
 }
 
 .btn-select-student:hover, .btn-select-student:focus {
 	background-color: #2980B9;
 }
 
-.dropdown-content a {
-	color: black;
-	padding: 4px;
-	text-decoration: none;
-	display: block;
+.dropdown-content {
+	display: flex;
+	flex-direction: row;
+	visibility: hidden;
 }
 
-.dropdown-content a:hover {background-color: #ddd}
+.btn-dropdown-name {
+	display: flex;
+	font-size: 18px;
+	border-radius: 3px;
+}
+
+.btn-dropdown-name:hover, .btn-dropdown-name:focus {
+	background-color: #2980B9;
+}
 
 .show-students {display:block;}
 
@@ -74,7 +75,6 @@
 	display: flex;
 	justify-content: center;
 	margin-top: 20px;
-
 }
 
 .container-view-notes {
