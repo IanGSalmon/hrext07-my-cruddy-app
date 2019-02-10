@@ -1,6 +1,10 @@
 # hrext07-my-cruddy-app
 Create Read Update and Delete framework using JS
 
+// save button
+// write to temp object in localStorage
+// displays temp in viewing window
+// submit button need to be re-worked so it pulls data from viewing window
 
 
 ### Task

@@ -42,6 +42,7 @@ $(document).ready(function(){
     Object.keys(displayText).forEach(key => {
       $('.notes-data').append('<div class="display-data-item">' + key + JSON.stringify(displayText[key]) + '</div>');
     })
+    $('.notes-data').append('<br><button class="btn-update">Update</button>&nbsp<button class="btn-delete">Delete</button>');
   }
 
   var createButtonViewDelete = function() {
@@ -55,6 +56,8 @@ $(document).ready(function(){
     Object.keys(displayText).forEach(key => {
       $('.notes-data').append('<div><button class="btn-del-item">' + key +':&nbsp&nbsp' + JSON.stringify(displayText[key]) + '</button></div>');
     })
+
+    $('.notes-data').append('<br><div><button class="btn-back-to-notes">Return to notes</button></div>');
   }
 
   var createButtonViewUpdate = function() {
@@ -68,10 +71,12 @@ $(document).ready(function(){
     Object.keys(displayText).forEach(key => {
       $('.notes-data').append('<div><button class="btn-update-item">' + key +':&nbsp&nbsp' + JSON.stringify(displayText[key]) + '</button></div>');
     })
+
+    $('.notes-data').append('<br><div><button class="btn-back-to-notes">Return to notes</button></div>');
   }
 
   var createLessonForm = function() {
-    $('.container-workspace').prepend('<div class="container-notes"><div class="container-notes-title"><div class="notes-title">Take Notes Here</div></div><div class="container-form"><input type="text" class="input-name" placeholder="name"><input type="text" class="input-date" placeholder="date"><input type="text" class="input-instrument" placeholder="instrument"><input type="text" class="input-piece" placeholder="piece"><button class="btn-add">Submit</button><button class="btn-update">Update</button><button class="btn-delete">Delete</button><button class="btn-clear">Clear</button><button class="btn-cancel-note">Cancel this note</button></div></div>');
+    $('.container-workspace').prepend('<div class="container-notes"><div class="container-notes-title"><div class="notes-title">Take Notes Here</div></div><div class="container-form"><input type="text" class="input-name" placeholder="name"><input type="text" class="input-date" placeholder="date"><input type="text" class="input-instrument" placeholder="instrument"><input type="text" class="input-piece" placeholder="piece"><button class="btn-save">Save</button><button class="btn-clear">Clear</button><button class="btn-cancel-note">Cancel this note</button></div></div>');
   }
 
   var clearForm = function() {
@@ -91,6 +96,16 @@ $(document).ready(function(){
 
   var addDividerBegin = function(){
     $('.container-workspace').prepend('<div class="divider"></div>');
+  }
+
+  var createTempSaveObject = function() {
+    localStorage.setItem('temp', "{}");
+  }
+
+  var writeTempToView = function() {
+    $('.notes-data').append(localStorage.temp);
+    $('.notes-data').append('<div class="submission-area"></div>');
+    $('.submission-area').append('<button class="btn-add">Submit</button>');
   }
 
   $(".btn-take-notes").on('click', function() {
@@ -123,12 +138,17 @@ $(document).ready(function(){
     }
   })
 
+  $('.container-main').on('click', '.btn-back-to-notes', function(e) {
+    var keyData = $('.display-data-name').text().slice(9);
+    createView(null, keyData);
+  })
+
   $('.dropdown-content').on('click', 'button', function(e) {
     var student = e.currentTarget;
     createView(student);
   })
 
-  $('.notes-data').on('click', '.btn-del-item', function(e) {
+  $('.container-main').on('click', '.btn-del-item', function(e) {
     var nameText = $('.display-data-name').text();
     var name = nameText.slice(9);
     var buttonText = e.currentTarget.innerText;
@@ -138,12 +158,13 @@ $(document).ready(function(){
     deleteLesson(name, dateToDel);
   })
 
-  $('.notes-data').on('click', '.btn-update-item', function(e) {
+  $('.container-main').on('click', '.btn-update-item', function(e) {
     console.log('updating');
   })
 
 
-  $('.container-main').on('click', '.btn-add', function(e){
+  $('.container-main').on('click', '.btn-save', function(e) {
+    var keyTemp = 'temp';
     var keyData = $('.input-name').val();
     var date = $('.input-date').val();
     var valueData = {  
@@ -153,20 +174,39 @@ $(document).ready(function(){
                 },
         };
 
-    // write to db
+    localStorage.setItem(keyTemp, JSON.stringify(valueData));
+    writeTempToView();
+  })
+
+  $('.container-main').on('click', '.btn-add', function(e){
+    var tempObj = JSON.parse(localStorage.temp);
+    var keyData = $('.input-name').val();
+    var date = Object.keys(tempObj)[0];
+    console.log(tempObj[date]);
+    var valueData = tempObj[date];
+    console.log(valueData);
+    // var valueData = {  
+    //     [date]: {
+    //             instrument: $('.input-instrument').val(),
+    //             piece: $('.input-piece').val()
+    //             },
+    //     };
+
+    // // write to db
     if (localStorage[keyData]) {
       var existingObj = JSON.parse(localStorage.getItem(keyData));
-      existingObj[date] = valueData[date];
+      existingObj[date] = valueData;
+      console.log(existingObj);
       localStorage.setItem(keyData, JSON.stringify(existingObj));
     } else {
       localStorage.setItem(keyData, JSON.stringify(valueData));
     };
-    // read from db
-    var displayText = JSON.parse(localStorage.getItem(keyData));
+    // // read from db
+    // var displayText = JSON.parse(localStorage.getItem(keyData));
 
-    createView(undefined, keyData, displayText);
-    createDropdownButtons();
-    clearForm();
+    // createView(undefined, keyData, displayText);
+    // createDropdownButtons();
+    // clearForm();
 
   });
 
@@ -208,6 +248,7 @@ $(document).ready(function(){
   // delete all?
   createNotesView();
   createDropdownButtons();
+  createTempSaveObject();
 
 
 });

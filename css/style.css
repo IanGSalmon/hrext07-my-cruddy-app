@@ -132,6 +132,12 @@
 	height: 45px;
 }
 
+.submission-area {
+	display: flex;
+	justify-content: center;
+	align-self: flex-end;
+}
+
 
 
 
