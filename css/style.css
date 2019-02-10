@@ -69,6 +69,10 @@
 	background-color: #2980B9;
 }
 
+.btn-data-item:hover, .btn-data-item:focus {
+	background-color: #2980B9;
+}
+
 .show-students {display:block;}
 
 .container-workspace {
@@ -109,7 +113,10 @@
 	width: 100px;
 }
 
-
+.delete-warning {
+	display: flex;
+	font-color: red;
+}
 
 
 

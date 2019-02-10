@@ -43,24 +43,48 @@ $(document).ready(function(){
     }
   })
 
+
+
   $('.btn-delete').on('click', function() {
     // re-build viewing area, but dates are buttons
     // click date to delete item
     createButtonView();
-
   })
 
+  $('.notes-data').on('click', 'button', function(e) {
+    // find person to use as key
+    var nameText = $('.display-data-name').text();
+    var name = nameText.slice(9);
+
+    // find date to delete
+    var buttonText = e.currentTarget.innerText;
+    var splitText = buttonText.split(':');
+    var dateToDel = splitText[0];
+
+    console.log(name);
+    deleteLesson(name, dateToDel);
+  })
+
+  var deleteLesson = function(key, date) {
+    var copyNotesObj = JSON.parse(localStorage[key]);
+    delete copyNotesObj[date];
+    // console.log(typeof key);
+    localStorage.setItem(key, JSON.stringify(copyNotesObj));
+  }
+
   var createButtonView = function() {
-    var keyData = $('.display-data-name');
-    console.log(keyData.innerHTML);
-    // var displayText = displayText || JSON.parse(localStorage.getItem(keyData));
+    var keyData = $('.display-data-name').text();
+    
+    var displayText = JSON.parse(localStorage.getItem(keyData));
+    console.log(displayText);
 
-    // $('.notes-data').html('');
-    // $('.notes-data').append('<div class="display-data-name">' + keyData + '</div><br>');
+    $('.notes-data').html('');
+    $('.notes-data').append('<div class="delete-warning"><font color="red">Select which lesson you would like to delete</font></div><br>');
+    $('.notes-data').append('<div class="display-data-name">Student:&nbsp' + keyData + '</div><br>');
 
-    // Object.keys(displayText).forEach(key => {
-    //   $('.notes-data').append('<div class="display-data-item">' + key + JSON.stringify(displayText[key]) + '</div>');
-    // })
+    Object.keys(displayText).forEach(key => {
+      $('.notes-data').append('<div><button class="btn-data-item">' + key +':&nbsp&nbsp' + JSON.stringify(displayText[key]) + '</button></div>');
+    })
   }
 
   $('.btn-add').on('click', function(e){
@@ -140,7 +164,7 @@ $(document).ready(function(){
   // });
 
   // delete all?
-
+  createDropdownButtons();
 
 });
 
