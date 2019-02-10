@@ -70,6 +70,7 @@ $(document).ready(function(){
     delete copyNotesObj[date];
     // console.log(typeof key);
     localStorage.setItem(key, JSON.stringify(copyNotesObj));
+    createView(null, key);
   }
 
   var createButtonView = function() {
