@@ -20,7 +20,6 @@ $(document).ready(function(){
   var deleteLesson = function(key, date) {
     var copyNotesObj = JSON.parse(localStorage[key]);
     delete copyNotesObj[date];
-    // console.log(typeof key);
     localStorage.setItem(key, JSON.stringify(copyNotesObj));
     createView(null, key);
   }
@@ -200,13 +199,11 @@ $(document).ready(function(){
     createLargeView(student);
   })
 
-  $('.container-main').on('click', '.btn-del-item', function(e) {
+  $('.container-main').on('click', '.btn-delete-item', function(e) {
     var name = $('.display-data-name').text();
-    var buttonText = e.currentTarget.innerText;
-    var splitText = buttonText.split(':');
-    var dateToDel = splitText[0];
+    console.log(this.parent());
 
-    deleteLesson(name, dateToDel);
+    // deleteLesson(name, dateToDel);
   })
 
   // might not need when I move button to large view
@@ -241,8 +238,8 @@ $(document).ready(function(){
     var tempObj = JSON.parse(localStorage.temp);
     var keyData = $('.input-name').val();
     var date = Object.keys(tempObj)[0];
-    console.log(tempObj[date]);
-    var valueData = tempObj[date];
+    var valueData = {};
+    valueData[date] = tempObj[date];
     console.log(valueData);
     // var valueData = {  
     //     [date]: {
@@ -254,8 +251,7 @@ $(document).ready(function(){
     // // write to db
     if (localStorage[keyData]) {
       var existingObj = JSON.parse(localStorage.getItem(keyData));
-      existingObj[date] = valueData;
-      console.log(existingObj);
+      existingObj[date] = valueData[date];
       localStorage.setItem(keyData, JSON.stringify(existingObj));
     } else {
       localStorage.setItem(keyData, JSON.stringify(valueData));
@@ -268,6 +264,7 @@ $(document).ready(function(){
     // clearForm();
     clearForm();
     $('.notes-data').html('');
+    createDropdownButtons();
   });
 
   $('.container-main').on('click', '.btn-clear', function(){
@@ -294,9 +291,7 @@ $(document).ready(function(){
   })
 
   $('.container-main').on('click', '.btn-delete-item', function(e) {
-    console.log('deleting');
     // deleteLesson(name, date);
-    console.log($('.display-data-name').text());
     var keyData = $('.display-data-name').text();
 
   })
