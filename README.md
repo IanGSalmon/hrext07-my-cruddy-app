@@ -1,10 +1,12 @@
 # hrext07-my-cruddy-app
 Create Read Update and Delete framework using JS
 
-// save button
-// write to temp object in localStorage
-// displays temp in viewing window
-// submit button need to be re-worked so it pulls data from viewing window
+Daily goals - 2/11
+// add new student button
+// create new view for all lessons/student
+	// add delete/confirm-cancel buttons
+	// add update/confirm-cancel button
+
 
 
 ### Task
@@ -14,11 +16,14 @@ This CRUD app will allow teachers to take detailed notes on their students durin
 - [ ] Where to store data? (localStorage)
 - [ ] How to capute data?
 		- input will be gathered primarily in button/dropdown format
+			- 2/11 - decided to use text input for MVP model
 		- text box only when necessary (add student or lesson category)
-- [ ] How to modify data? (buttons, dropdown)
+- [ ] How to modify data? (buttons, dropdown) (2 hours expected)
+	- dropdown nixed in favor or button list (2/11)
 - [ ] How to view data?
 		- current lesson in visible, sculpted UI container
 		- previous 5 lessons in string formatting at bottom of page
+		- 2/11 - decided to add view for all lessons
 - [ ] UI/UX considerations 
 		- must be minimalist, but highly customizable
 		- TWO CLICKS per lesson segment)
@@ -44,6 +49,8 @@ add student name as keys
 	- student picture
 	- parent names
 
+
+<!-- Brainstorming - unsorted list
 capture each lesson as new object value
 
 object will hold default values
@@ -79,4 +86,4 @@ Dreams
 	- attendance records export
 	- side by side object view (2 lessons, big text)
 	- trends view
-	- automatic warning for negative trends
+	- automatic warning for negative trends -->

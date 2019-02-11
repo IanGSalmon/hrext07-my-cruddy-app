@@ -45,6 +45,53 @@ $(document).ready(function(){
     $('.notes-data').append('<br><button class="btn-update">Update</button>&nbsp<button class="btn-delete">Delete</button>');
   }
 
+  var createLargeView = function(event, keyData) {
+    var keyData = keyData || event.innerText;
+    var displayText = JSON.parse(localStorage.getItem(keyData));
+
+    $('.container-workspace').html('');
+    $('.container-workspace').append('<div class="display-large-view"></div>');
+    $('.display-large-view').append('<div class="display-data-name">' + keyData + '</div><br>');
+    $('.display-large-view').append('<div class="container-large-view-btns"><br><button class="btn-update">Update</button>&nbsp<button class="btn-delete">Delete</button></div><br>');
+    $('.display-large-view').append('<div class="container-large-view-data"></div>');
+    Object.keys(displayText).forEach(key => {
+      $('.container-large-view-data').append('<div class="display-data-item">' + key + JSON.stringify(displayText[key]) + '</div>');
+    })
+  }
+
+  var createLargeViewDeleteBtns = function(event) {
+    var keyData = $('.display-data-name').text();
+    var displayText = JSON.parse(localStorage.getItem(keyData));
+
+    $('.container-workspace').html('');
+    $('.container-workspace').append('<div class="display-large-view"></div>');
+    $('.display-large-view').append('<div class="display-data-name">' + keyData + '</div><br>');
+    $('.display-large-view').append('<div class="delete-warning"><font color="red">Select which lesson you would like to delete</font></div><br>');
+    $('.display-large-view').append('<div class="container-large-view-data"></div>');
+    Object.keys(displayText).forEach(key => {
+      $('.container-large-view-data').append('<div class="display-data-item"><button class="btn-delete-item">Delete</button>&nbsp' + key + '&nbsp&nbsp' + JSON.stringify(displayText[key]) + '</div>');
+    })
+    $('.container-large-view-data').append('<div><br><button class="btn-return-to-large-view">Cancel</button>');
+  }
+
+  var createLargeViewUpdateBtns = function(event) {
+      var keyData = $('.display-data-name').text();
+    var displayText = JSON.parse(localStorage.getItem(keyData));
+
+    $('.container-workspace').html('');
+    $('.container-workspace').append('<div class="display-large-view"></div>');
+    $('.display-large-view').append('<div class="display-data-name">' + keyData + '</div><br>');
+    $('.display-large-view').append('<div class="update-notification"><font color="blue">Select which lesson you would like to update</font></div><br>');
+    $('.display-large-view').append('<div class="container-large-view-data"></div>');
+
+    $('.notes-data').append('<div class="display-data-name">Student:&nbsp' + keyData + '</div><br>');
+
+    Object.keys(displayText).forEach(key => {
+      $('.container-large-view-data').append('<div class="display-data-item"><button class="btn-update-item">Update</button>&nbsp' + key + '&nbsp&nbsp' + JSON.stringify(displayText[key]) + '</div>');
+    })
+    $('.container-large-view-data').append('<div><br><button class="btn-return-to-large-view">Cancel</button>');
+  }
+
   var createButtonViewDelete = function() {
     var keyData = $('.display-data-name').text();
     var displayText = JSON.parse(localStorage.getItem(keyData));
@@ -86,7 +133,8 @@ $(document).ready(function(){
     $('.input-piece').val('');
   }
 
-  var createNotesView = function() {
+  var createInstructionsView = function() {
+    $('.container-workspace').html('');
     $('.container-workspace').append('<div class="container-view-notes"><div class="notes-data">Select "View Student" or "Take Notes" to begin!</div></div>');
   }
 
@@ -116,9 +164,10 @@ $(document).ready(function(){
       $(".dropdown-content").css('visibility', 'hidden');
     }
 
-    $('.notes-data').text('');
+    createInstructionsView();
     addDividerBegin();
     createLessonForm();
+    $('.notes-data').text('');
   });
 
   $(".btn-view-student").on('click', function() {
@@ -127,14 +176,17 @@ $(document).ready(function(){
     } else {
       $(".container-select-student").css("visibility", "hidden");
       $(".dropdown-content").css('visibility', 'hidden');
+      createInstructionsView();
     }
   });
   
-  $(".btn-select-student").on('click', function() {
+  $(".container-main").on('click', '.btn-select-student', function() {
     if ($(".dropdown-content").css("visibility") === "hidden") {
       $(".dropdown-content").css('visibility', 'visible');
     } else {
       $(".dropdown-content").css('visibility', 'hidden');
+      createInstructionsView();
+
     }
   })
 
@@ -143,14 +195,13 @@ $(document).ready(function(){
     createView(null, keyData);
   })
 
-  $('.dropdown-content').on('click', 'button', function(e) {
+  $('.container-main').on('click', '.btn-dropdown-name', function(e) {
     var student = e.currentTarget;
-    createView(student);
+    createLargeView(student);
   })
 
   $('.container-main').on('click', '.btn-del-item', function(e) {
-    var nameText = $('.display-data-name').text();
-    var name = nameText.slice(9);
+    var name = $('.display-data-name').text();
     var buttonText = e.currentTarget.innerText;
     var splitText = buttonText.split(':');
     var dateToDel = splitText[0];
@@ -158,10 +209,18 @@ $(document).ready(function(){
     deleteLesson(name, dateToDel);
   })
 
+  // might not need when I move button to large view
   $('.container-main').on('click', '.btn-update-item', function(e) {
     console.log('updating');
   })
 
+  $('.container-main').on('click', '.btn-update', function(e) {
+    createLargeViewUpdateBtns();
+  })
+
+  $('.container-main').on('click', '.btn-delete', function(e) {
+    createLargeViewDeleteBtns();
+  })
 
   $('.container-main').on('click', '.btn-save', function(e) {
     var keyTemp = 'temp';
@@ -207,7 +266,8 @@ $(document).ready(function(){
     // createView(undefined, keyData, displayText);
     // createDropdownButtons();
     // clearForm();
-
+    clearForm();
+    $('.notes-data').html('');
   });
 
   $('.container-main').on('click', '.btn-clear', function(){
@@ -215,13 +275,14 @@ $(document).ready(function(){
     $('.container-data').text('');
   });
 
-  $('.container-main').on('click','.btn-update', function(e) {
-    createButtonViewUpdate();
-  });
+  // hiding while I play with large view
+  // $('.container-main').on('click','.btn-update', function(e) {
+  //   createButtonViewUpdate();
+  // });
 
-  $('.container-main').on('click','.btn-delete', function(e) {
-    createButtonViewDelete();
-  })
+  // $('.container-main').on('click','.btn-delete', function(e) {
+  //   createButtonViewDelete();
+  // })
 
   $('.container-main').on('click', '.btn-cancel-note', function(e) {
     $('.container-notes').append('<button class="btn-confirm-cancel">Are you sure?</button>');
@@ -229,10 +290,21 @@ $(document).ready(function(){
 
   $('.container-main').on('click', '.btn-confirm-cancel', function(e) {
     $('.container-workspace').html('');
-    createNotesView();
+    createInstructionsView();
   })
 
+  $('.container-main').on('click', '.btn-delete-item', function(e) {
+    console.log('deleting');
+    // deleteLesson(name, date);
+    console.log($('.display-data-name').text());
+    var keyData = $('.display-data-name').text();
 
+  })
+
+  $('.container-main').on('click', '.btn-return-to-large-view', function(e) {
+    var keyData = $('.display-data-name').text();
+    createLargeView(null, keyData);
+  })
 
   // update db
     // need to expand when  more than 1 item is added
@@ -246,7 +318,7 @@ $(document).ready(function(){
   // });
 
   // delete all?
-  createNotesView();
+  createInstructionsView();
   createDropdownButtons();
   createTempSaveObject();
 
