@@ -85,7 +85,7 @@
 	display: flex;
 	flex-direction: column;
 /*	margin-left: 200px;*/
-	height: 350px;
+	height: 450px;
 	width: 500px;
 	border: solid 3px;
 	border-radius: 5px;
@@ -95,7 +95,7 @@
 	display: flex;
 	flex-direction: column;
 /*	margin-left: 200px;*/
-	height: 350px;
+	height: 450px;
 	width: 700px;
 	border: solid 3px;
 	border-radius: 5px;
@@ -120,7 +120,7 @@
 
 .btn-cancel-note {
 	display: flex;
-	margin-top: 100px;
+	margin-top: 35px;
 	border-radius: 3px;
 }
 
@@ -143,13 +143,64 @@
 	justify-content: flex-start;
 	flex-direction: column;
 	border: solid 2px;
-	width: 900px;
+	width: 1200px;
 }
 
-.btn-update {
-	font-size:;
+.input-name {
+	width: 200px;
 }
 
+.input-date {
+	width: 200px;
+}
+
+.input-instrument {
+	width: 200px;
+}
+
+.input-piece {
+	width: 300px;
+}
+
+.input-tonalization {
+	width: 400px;
+	height: 20px;
+}
+
+.input-scales {
+	width: 400px;
+	height: 20px;
+}
+
+.input-etude {
+	width: 400px;
+	height: 20px;
+}
+
+.input-review {
+	width: 400px;
+	height: 20px;
+}
+
+.input-working-piece {
+	width: 400px;
+	height: 20px;
+}
+
+.input-reading {
+	width: 400px;
+	height: 20px;
+}
+
+.temp-name, .temp-date, .temp-instrument, .temp-tonalization, .temp-scales, .temp-etude,
+.temp-review, .temp-working-piece, .temp-reading {
+	font-weight: bold;
+}
+
+.temp-notes {
+	font-weight: normal;
+	font-style: italic;
+}
 
 
 
