@@ -6,16 +6,6 @@ interact with localstorage
  */
 
 $(document).ready(function(){
-  // this is where we jquery
-  //var keyData = 'ourKey'; // going to need to make this dynamic?
-
-  // function showStudents() {
-  //   if ($(".container-select-student").css("visibility") === "hidden") {
-  //     $(".container-select-student").css("visibility", "visible");
-  //   } else {
-  //     $(".container-select-student").css("visibility", "hidden");
-  //   }
-  // }
 
   var deleteLesson = function(key, date) {
     var copyNotesObj = JSON.parse(localStorage[key]);
@@ -208,11 +198,16 @@ $(document).ready(function(){
     createLargeViewDeleteBtns();
   })
 
-  // might not need when I move button to large view
   $('.container-main').on('click', '.btn-update-item', function(e) {
     var name = $('.display-data-name').text();
+
     var splitText = $(this).parent().text().split(/\s{1}/);
+    console.log(splitText);
     var date = splitText[1] + ' ' + splitText[2];
+    // var currObj = JSON.parse(splitText[4]);
+    // var currValues = [];
+    // Object.keys(currObj).forEach(key => currValues.push(currObj[key]))
+    // console.log(currValues);
 
     $('.container-workspace').html('');
     createInstructionsView();
@@ -255,15 +250,7 @@ $(document).ready(function(){
     var date = Object.keys(tempObj)[0];
     var valueData = {};
     valueData[date] = tempObj[date];
-    console.log(valueData);
-    // var valueData = {  
-    //     [date]: {
-    //             instrument: $('.input-instrument').val(),
-    //             piece: $('.input-piece').val()
-    //             },
-    //     };
 
-    // // write to db
     if (localStorage[keyData]) {
       var existingObj = JSON.parse(localStorage.getItem(keyData));
       existingObj[date] = valueData[date];
@@ -271,12 +258,7 @@ $(document).ready(function(){
     } else {
       localStorage.setItem(keyData, JSON.stringify(valueData));
     };
-    // // read from db
-    // var displayText = JSON.parse(localStorage.getItem(keyData));
-
-    // createView(undefined, keyData, displayText);
-    // createDropdownButtons();
-    // clearForm();
+ 
     clearForm();
     $('.notes-data').html('');
     createDropdownButtons();
@@ -286,15 +268,6 @@ $(document).ready(function(){
     localStorage.clear();
     $('.container-data').text('');
   });
-
-  // hiding while I play with large view
-  // $('.container-main').on('click','.btn-update', function(e) {
-  //   createButtonViewUpdate();
-  // });
-
-  // $('.container-main').on('click','.btn-delete', function(e) {
-  //   createButtonViewDelete();
-  // })
 
   $('.container-main').on('click', '.btn-cancel-note', function(e) {
     $('.container-notes').append('<button class="btn-confirm-cancel">Are you sure?</button>');
