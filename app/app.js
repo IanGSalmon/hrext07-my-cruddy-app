@@ -201,15 +201,29 @@ $(document).ready(function(){
 
   $('.container-main').on('click', '.btn-delete-item', function(e) {
     var name = $('.display-data-name').text();
-    console.log(this.parent());
+    var splitText = $(this).parent().text().split(/\s{1}/);
+    var date = splitText[1] + ' ' + splitText[2];
 
-    // deleteLesson(name, dateToDel);
+    deleteLesson(name, date);
+    createLargeViewDeleteBtns();
   })
 
   // might not need when I move button to large view
   $('.container-main').on('click', '.btn-update-item', function(e) {
-    console.log('updating');
+    var name = $('.display-data-name').text();
+    var splitText = $(this).parent().text().split(/\s{1}/);
+    var date = splitText[1] + ' ' + splitText[2];
+
+    $('.container-workspace').html('');
+    createInstructionsView();
+    $('.notes-data').html('');
+    addDividerBegin();
+    createUpdateForm(name, date);
   })
+
+  var createUpdateForm = function() {
+    $('.container-workspace').prepend('<div class="container-notes"><div class="container-notes-title"><div class="notes-title">Take Notes Here</div></div><div class="container-form"><input type="text" class="input-name" value="' + arguments[0] + '"><input type="text" class="input-date" value="' + arguments[1] + '"><input type="text" class="input-instrument" placeholder="instrument"><input type="text" class="input-piece" placeholder="piece"><button class="btn-save">Save</button><button class="btn-clear">Clear</button><button class="btn-cancel-note">Cancel this note</button></div></div>');
+  }
 
   $('.container-main').on('click', '.btn-update', function(e) {
     createLargeViewUpdateBtns();
@@ -229,7 +243,8 @@ $(document).ready(function(){
                 piece: $('.input-piece').val()
                 },
         };
-
+    $('.notes-data').html('');
+    createTempSaveObject();
     localStorage.setItem(keyTemp, JSON.stringify(valueData));
     writeTempToView();
   })
@@ -288,12 +303,6 @@ $(document).ready(function(){
   $('.container-main').on('click', '.btn-confirm-cancel', function(e) {
     $('.container-workspace').html('');
     createInstructionsView();
-  })
-
-  $('.container-main').on('click', '.btn-delete-item', function(e) {
-    // deleteLesson(name, date);
-    var keyData = $('.display-data-name').text();
-
   })
 
   $('.container-main').on('click', '.btn-return-to-large-view', function(e) {

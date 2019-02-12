@@ -7,6 +7,8 @@ Daily goals - 2/11
 	// add delete/confirm-cancel buttons
 	// add update/confirm-cancel button
 
+// ADDRESS ITEMS
+	// month must be given in 3 
 
 
 ### Task
