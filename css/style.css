@@ -1,6 +1,7 @@
 .container-title {
 	display: flex;
 	justify-content: center;
+	background-color: #00D2FF;
 	border: solid 2px;
 	margin-left: 400px;
 	margin-right: 400px;
@@ -25,6 +26,7 @@
 	padding: 16px 16px;
 	font-size: 32px;
 	border-radius: 20px;
+	background-color: rgba(0,210,255,1.0);
 }
 
 .btn-take-notes {
@@ -32,6 +34,7 @@
 	padding: 16px 16px;
 	font-size: 32px;
 	border-radius: 20px;
+	background-color: rgba(0,210,255,1.0);
 }
 
 .container-select-student {
@@ -94,11 +97,11 @@
 .container-notes {
 	display: flex;
 	flex-direction: column;
-/*	margin-left: 200px;*/
 	height: 450px;
 	width: 700px;
 	border: solid 3px;
 	border-radius: 5px;
+	background-color: rgba(0,210,255, 0.2);
 }
 
 .container-notes-title {
@@ -110,6 +113,7 @@
 	display: flex;
 	flex-direction: column;
 	margin-top: 5px;
+	margin-left: 3px;
 	width: 100px;
 }
 
@@ -125,11 +129,15 @@
 }
 
 .btn-confirm-cancel {
+	display:flex;
+	visibility: hidden;
+	align-self: flex-start;
 	margin-top: 3px;
 	border: 2px solid;
-	background-color: #FF5733;
-	font-size: 24px;
-	height: 45px;
+	background-color: rgba(0,210,255,1.0);
+	font-size: 18px;
+	height: 50px;
+	width: 103px;
 }
 
 .submission-area {
@@ -143,6 +151,7 @@
 	display: flex;
 	justify-content: flex-start;
 	flex-direction: column;
+	background-color: rgba(0,210,255,0.2);
 	border: solid 2px;
 	width: 1200px;
 }
@@ -159,38 +168,38 @@
 	width: 200px;
 }
 
-.input-piece {
+/*.input-piece {
 	width: 300px;
-}
+}*/
 
 .input-tonalization {
-	width: 400px;
-	height: 20px;
+	width: 500px;
+	height: 25px;
 }
 
 .input-scales {
-	width: 400px;
-	height: 20px;
+	width: 500px;
+	height: 25px;
 }
 
 .input-etude {
-	width: 400px;
-	height: 20px;
+	width: 500px;
+	height: 25px;
 }
 
 .input-review {
-	width: 400px;
-	height: 20px;
+	width: 500px;
+	height: 25px;
 }
 
 .input-working-piece {
-	width: 400px;
-	height: 20px;
+	width: 500px;
+	height: 25px;
 }
 
 .input-reading {
-	width: 400px;
-	height: 20px;
+	width: 500px;
+	height: 25px;
 }
 
 .temp-name, .temp-date, .temp-instrument, .temp-tonalization, .temp-scales, .temp-etude,
@@ -205,10 +214,33 @@
 
 .inline-notes {
 	font-weight: normal;
-	
+
+}
+
+.text-instructions {
+	display: flex;
+	justify-content: center;
+	margin-top: 30px;
+	font-family: "Lucida Console", Monaco, monospace;
+}
+
+.notes-data {
+	margin-top: 3px;
+	margin-left: 5px;
+}
+
+.container-view-notes {
+	background-color: rgba(0,210,255, 0.2);
 }
 
 
+
+input {
+		background-color: #e5faff;
+		margin-bottom: 2px;
+		border-radius: 2px;
+		border: 0.25px solid;
+}
 
 
 
