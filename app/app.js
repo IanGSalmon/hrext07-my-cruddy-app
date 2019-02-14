@@ -89,11 +89,13 @@ $(document).ready(function(){
   }
 
   var createUpdateForm = function() {
-    $('.container-workspace').prepend('<div class="container-notes"><div class="container-notes-title"><div class="notes-title">Take Notes Here</div></div><div class="container-form"><input type="text" class="input-name" value="' + arguments[0] + '"><input type="text" class="input-date" value="' + arguments[1] + '"><input type="text" class="input-instrument" placeholder="instrument"><br><input type="text" class="input-tonalization" placeholder="tonalization"><input type="text" class="input-scales" placeholder="scales"><input type="text" class="input-etude" placeholder="etude"><input type="text" class="input-review" placeholder="review pieces"><input type="text" class="input-working-piece" placeholder="working piece"><input type="text" class="input-reading" placeholder="reading"><br><button class="btn-save">Save</button><button class="btn-clear">Clear</button><button class="btn-cancel-note">Cancel this note</button></div><button class="btn-confirm-cancel">Are you sure?</button></div>');
+    $('.container-workspace').prepend('<div class="container-notes"><div class="container-notes-title"></div><div class="container-form">Name:&nbsp<input type="text" class="input-name" value="' + arguments[0] + '">Date:&nbsp<input type="text" class="input-date" value="' + arguments[1] + '">Instrument:&nbsp<input type="text" class="input-instrument" placeholder="instrument"><br>Tonalization:&nbsp<input type="text" class="input-tonalization" placeholder="tonalization">Scales:&nbsp<input type="text" class="input-scales" placeholder="scales">Etude:&nbsp<input type="text" class="input-etude" placeholder="etude">Review&nbspPieces:&nbsp<input type="text" class="input-review" placeholder="review pieces">Working&nbspPiece:&nbsp<input type="text" class="input-working-piece" placeholder="working piece">Reading:&nbsp<input type="text" class="input-reading" placeholder="reading"></div><div class="form-btns"><button class="btn-save">Save</button><button class="btn-cancel-note">Cancel this note</button><button class="btn-confirm-cancel">Are you sure?</button></div>');
+
+    // $('.container-workspace').prepend('<div class="container-notes"><div class="container-notes-title"></div><div class="container-form"><input type="text" class="input-name" value="' + arguments[0] + '"><input type="text" class="input-date" value="' + arguments[1] + '"><input type="text" class="input-instrument" placeholder="instrument"><br><input type="text" class="input-tonalization" placeholder="tonalization"><input type="text" class="input-scales" placeholder="scales"><input type="text" class="input-etude" placeholder="etude"><input type="text" class="input-review" placeholder="review pieces"><input type="text" class="input-working-piece" placeholder="working piece"><input type="text" class="input-reading" placeholder="reading"><br><button class="btn-save">Save</button><button class="btn-cancel-note">Cancel this note</button></div><button class="btn-confirm-cancel">Are you sure?</button></div>');
   }
 
   var createLessonForm = function() {
-    $('.container-workspace').prepend('<div class="container-notes"><div class="container-notes-title"><div class="notes-title">Take Notes Here</div></div><div class="container-form"><input type="text" class="input-name" placeholder="name"><input type="text" class="input-date" placeholder="date"><input type="text" class="input-instrument" placeholder="instrument"><br><input type="text" class="input-tonalization" placeholder="tonalization"><input type="text" class="input-scales" placeholder="scales"><input type="text" class="input-etude" placeholder="etude"><input type="text" class="input-review" placeholder="review pieces"><input type="text" class="input-working-piece" placeholder="working piece"><input type="text" class="input-reading" placeholder="reading"><br><button class="btn-save">Save</button><button class="btn-clear">Clear</button><button class="btn-cancel-note">Cancel this note</button></div><button class="btn-confirm-cancel">Are you sure?</button></div>');
+    $('.container-workspace').prepend('<div class="container-notes"><div class="container-notes-title"></div><div class="container-form">Name:&nbsp<input type="text" class="input-name" placeholder="name">Date:&nbsp<input type="text" class="input-date" placeholder="date">Instrument:&nbsp<input type="text" class="input-instrument" placeholder="instrument"><br>Tonalization:&nbsp<input type="text" class="input-tonalization" placeholder="tonalization">Scales:&nbsp<input type="text" class="input-scales" placeholder="scales">Etude:&nbsp<input type="text" class="input-etude" placeholder="etude">Review&nbspPieces:&nbsp<input type="text" class="input-review" placeholder="review pieces">Working&nbspPiece:&nbsp<input type="text" class="input-working-piece" placeholder="working piece">Reading:&nbsp<input type="text" class="input-reading" placeholder="reading"></div><div class="form-btns"><button class="btn-save">Save</button><button class="btn-cancel-note">Cancel this note</button><button class="btn-confirm-cancel">Are you sure?</button></div>');
   }
 
   var clearForm = function() {
@@ -154,7 +156,7 @@ $(document).ready(function(){
 
 
     $('.notes-data').append('<br><div class="submission-area"></div>');
-    $('.submission-area').append('<div class="warning-submit">WARNING: Note is not fully saved until you click "submit"!</div><button class="btn-add">Submit</button>');
+    $('.submission-area').append('<span class="warning-submit">WARNING:&nbsp <br> Note is not fully saved until you click "submit"!</span><button class="btn-add">Submit</button>');
   }
 
   var writeTempToView = function() {
@@ -210,7 +212,14 @@ $(document).ready(function(){
 
 });
 
-  var buildNoteView
+  var writeNoteToTemp = function() {
+    var name = $('.input-name').val();
+    var date = $('.input-date').val();
+    var tempObj = JSON.parse(localStorage[name]);
+
+    localStorage.setItem('temp', JSON.stringify(tempObj));
+  }
+
 
   $(".btn-view-student").on('click', function() {
     if ($(".container-select-student").css("visibility") === "hidden") {
@@ -266,6 +275,7 @@ $(document).ready(function(){
     addDividerBegin();
     createUpdateForm(name, date);
     writeNoteToView();
+    writeNoteToTemp();
   })
 
   $('.container-main').on('click', '.btn-update', function(e) {
@@ -276,19 +286,38 @@ $(document).ready(function(){
     createLargeViewDeleteBtns();
   })
 
+  var hasText = function(selector, key) {
+    var date = $('.input-date').val();
+    var tempObj = JSON.parse(localStorage.temp);
+    if (selector.val().length) {
+      return selector.val();
+    }
+
+    if (tempObj.hasOwnProperty(date)) {
+
+      var oldNote = tempObj[date];
+      var oldVal = oldNote[key];
+      return oldVal;
+    } else {
+      return '';
+    }
+
+  }
+
   $('.container-main').on('click', '.btn-save', function(e) {
     var keyTemp = 'temp';
     var keyData = $('.input-name').val();
     var date = $('.input-date').val();
+
     var valueData = {  
         [date]: {
-                instrument: $('.input-instrument').val(),
-                tonalization: $('.input-tonalization').val(),
-                scales: $('.input-scales').val(),
-                etude: $('.input-etude').val(),
-                "review pieces": $('.input-review').val(),
-                "working piece": $('.input-working-piece').val(),
-                reading: $('.input-reading').val(),
+                instrument: hasText($('.input-instrument'), 'instrument'),
+                tonalization: hasText($('.input-tonalization'), 'tonalization'),
+                scales: hasText($('.input-scales'), 'scales'),
+                etude: hasText($('.input-etude'), 'etude'),
+                "review pieces": hasText($('.input-review'), 'review pieces'),
+                "working piece": hasText($('.input-working-piece'), 'working piece'),
+                reading: hasText($('.input-reading'), 'reading'),
                 },
         };
 

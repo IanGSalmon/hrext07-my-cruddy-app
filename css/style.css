@@ -12,7 +12,7 @@
 .container-view-or-take {
 	display: flex;
 	justify-content: center;
-	margin-top: 50px;
+	margin-top: 30px;
 }
 
 .divider {
@@ -88,7 +88,7 @@
 	display: flex;
 	flex-direction: column;
 /*	margin-left: 200px;*/
-	height: 450px;
+	height: 650px;
 	width: 500px;
 	border: solid 3px;
 	border-radius: 5px;
@@ -97,7 +97,7 @@
 .container-notes {
 	display: flex;
 	flex-direction: column;
-	height: 450px;
+	height: 650px;
 	width: 700px;
 	border: solid 3px;
 	border-radius: 5px;
@@ -115,6 +115,7 @@
 	margin-top: 5px;
 	margin-left: 3px;
 	width: 100px;
+	font-family: "Lucida Console", Monaco, monospace;
 }
 
 .delete-warning {
@@ -122,10 +123,40 @@
 	font-color: red;
 }
 
+.form-btns {
+	display:flex;
+	justify-content: center;
+	/*font-family: Times New Roman, serif;*/
+	flex-direction: row;
+	margin-left: 10px;
+	margin-bottom: 5px;
+}
+
+.btn-save {
+	width: 200px;
+	height: 25px;
+	margin-right: 3px;
+}
+
 .btn-cancel-note {
+	width: 200px;
+	height: 25px;
+	margin-right: 3px;
+}
+
+.btn-confirm-cancel {
+	visibility: hidden;
+	width: 200px;
+	height: 25px;
+	background-color: rgba(255, 0, 0, 0.6);
+}
+
+
+/*.btn-cancel-note {
 	display: flex;
 	margin-top: 35px;
 	border-radius: 3px;
+	height: 300px;
 }
 
 .btn-confirm-cancel {
@@ -138,13 +169,15 @@
 	font-size: 18px;
 	height: 50px;
 	width: 103px;
-}
+}*/
+
 
 .submission-area {
 	display: flex;
 	justify-content: center;
 	flex-direction: column;
 	align-items: center;
+	font-family: "Lucida Console", Monaco, monospace;
 }
 
 .display-large-view {
@@ -202,21 +235,6 @@
 	height: 25px;
 }
 
-.temp-name, .temp-date, .temp-instrument, .temp-tonalization, .temp-scales, .temp-etude,
-.temp-review, .temp-working-piece, .temp-reading {
-	font-weight: bold;
-}
-
-.temp-notes {
-	font-weight: normal;
-	font-style: italic;
-}
-
-.inline-notes {
-	font-weight: normal;
-
-}
-
 .text-instructions {
 	display: flex;
 	justify-content: center;
@@ -224,9 +242,23 @@
 	font-family: "Lucida Console", Monaco, monospace;
 }
 
+.temp-name, .temp-date, .temp-instrument, .temp-tonalization, .temp-scales, .temp-etude,
+.temp-review, .temp-working-piece, .temp-reading {
+	font-family: Coronetscript, cursive;
+	font-weight: 949;
+
+}
+
+.inline-notes, .temp-notes {
+	font-family: Coronetscript, cursive;
+	font-weight: 300;
+
+}
+
 .notes-data {
 	margin-top: 3px;
 	margin-left: 5px;
+
 }
 
 .container-view-notes {
@@ -240,11 +272,13 @@ input {
 		margin-bottom: 2px;
 		border-radius: 2px;
 		border: 0.25px solid;
+		height: 30px;
 }
 
 .display-data-item {
-	font-weight: 550;
+	/*font-weight: 550;*/
 }
+
 
 
 
