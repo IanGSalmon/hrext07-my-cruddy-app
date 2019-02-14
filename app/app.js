@@ -21,14 +21,39 @@ $(document).ready(function(){
 
     $('.container-workspace').html('');
     $('.container-workspace').append('<div class="display-large-view"></div>');
-    $('.display-large-view').append('<div class="display-data-name">' + keyData + '</div><br>');
-    $('.display-large-view').append('<div class="container-large-view-btns"><br><button class="btn-update">Update</button>&nbsp<button class="btn-delete">Delete</button></div><br>');
+    $('.display-large-view').append('<h3 class="display-data-name">' + keyData + '</h3>');
+    $('.display-large-view').append('<div class="container-large-view-btns"><button class="btn-update">Update</button>&nbsp<button class="btn-delete">Delete</button></div><br>');
     $('.display-large-view').append('<div class="container-large-view-data"></div>');
+
+    if ($('.container-large-view-data').css('display') !== 'grid') {
+      $('.container-large-view-data').css('display', 'grid');
+    }
+
+    $('.container-large-view-data').append('<h3>Date</h3>');
+    $('.container-large-view-data').append('<h3>Instrument</h3>');
+    $('.container-large-view-data').append('<h3>Tonalization</h3>');
+    $('.container-large-view-data').append('<h3>Scales</h3>');
+    $('.container-large-view-data').append('<h3>Etude</h3>');
+    $('.container-large-view-data').append('<h3>Review Pieces</h3>');
+    $('.container-large-view-data').append('<h3>Working Piece</h3>');
+    $('.container-large-view-data').append('<h3>Reading</h3>');
+
     Object.keys(displayText).forEach(key => {
+      var currLessonData = displayText[key];
       $('.container-large-view-data').append('<div class="display-data-item">' + key + '</div>');
-      $('.container-large-view-data').append('<p class="display-data-details"><i>Instrument:</i>&nbsp' + displayText[key]["instrument"] + ',&nbsp&nbsp<i>Tonalization:</i>&nbsp' + displayText[key]["tonalization"] +',&nbsp&nbsp<i>Scales:</i>&nbsp' + displayText[key]["scales"] + ',&nbsp&nbsp<i>Etude:</i>&nbsp' + displayText[key]["etude"] +',&nbsp&nbsp<i>Review Pieces:</i>&nbsp' + displayText[key]["review pieces"] + ',&nbsp&nbsp<i>Working Piece:</i>&nbsp' + displayText[key]["working piece"] +',&nbsp&nbsp<i>Reading:</i>&nbsp' + displayText[key]["reading"]);
+      Object.keys(currLessonData).forEach(item => {
+        $('.container-large-view-data').append('<span>' + currLessonData[item] + '</span>')
+      })
+      // $('.container-large-view-data').append('<p class="display-data-details"><i>Instrument:</i>&nbsp' + displayText[key]["instrument"] + ',&nbsp&nbsp<i>Tonalization:</i>&nbsp' + displayText[key]["tonalization"] +',&nbsp&nbsp<i>Scales:</i>&nbsp' + displayText[key]["scales"] + ',&nbsp&nbsp<i>Etude:</i>&nbsp' + displayText[key]["etude"] +',&nbsp&nbsp<i>Review Pieces:</i>&nbsp' + displayText[key]["review pieces"] + ',&nbsp&nbsp<i>Working Piece:</i>&nbsp' + displayText[key]["working piece"] +',&nbsp&nbsp<i>Reading:</i>&nbsp' + displayText[key]["reading"]);
 
     })
+    
+   
+   
+   
+   
+   
+     
   }
 
   var createLargeViewDeleteBtns = function(event) {
@@ -40,6 +65,8 @@ $(document).ready(function(){
     $('.display-large-view').append('<div class="display-data-name">' + keyData + '</div><br>');
     $('.display-large-view').append('<div class="delete-warning"><font color="red">Select which lesson you would like to delete</font></div><br>');
     $('.display-large-view').append('<div class="container-large-view-data"></div>');
+    $('.container-large-view-data').css('display', 'flex');
+    $('.container-large-view-data').css('flex-direction', 'column');
     Object.keys(displayText).forEach(key => {
       $('.container-large-view-data').append('<div class="display-data-item"><button class="btn-delete-item">Delete</button>&nbsp' + key + '&nbsp&nbsp</div>');
       $('.container-large-view-data').append('<p class="display-data-details"><i>Instrument:</i>&nbsp' + displayText[key]["instrument"] + ',&nbsp&nbsp<i>Tonalization:</i>&nbsp' + displayText[key]["tonalization"] +',&nbsp&nbsp<i>Scales:</i>&nbsp' + displayText[key]["scales"] + ',&nbsp&nbsp<i>Etude:</i>&nbsp' + displayText[key]["etude"] +',&nbsp&nbsp<i>Review Pieces:</i>&nbsp' + displayText[key]["review pieces"] + ',&nbsp&nbsp<i>Working Piece:</i>&nbsp' + displayText[key]["working piece"] +',&nbsp&nbsp<i>Reading:</i>&nbsp' + displayText[key]["reading"]);
@@ -56,7 +83,8 @@ $(document).ready(function(){
     $('.display-large-view').append('<div class="display-data-name">' + keyData + '</div><br>');
     $('.display-large-view').append('<div class="update-notification"><font color="blue">Select which lesson you would like to update</font></div><br>');
     $('.display-large-view').append('<div class="container-large-view-data"></div>');
-
+    $('.container-large-view-data').css('display', 'flex');
+    $('.container-large-view-data').css('flex-direction', 'column');
     $('.notes-data').append('<div class="display-data-name">Student:&nbsp' + keyData + '</div><br>');
 
     Object.keys(displayText).forEach(key => {
@@ -120,9 +148,9 @@ $(document).ready(function(){
     $('.notes-data').append('<div class="temp-name">Name:&nbsp</div><div class="temp-date">Date:&nbsp</div><div class="temp-instrument">Instrument:&nbsp</div><br><div class="temp-tonalization">Tonalization:</div><br><div class="temp-scales">Scales:</div><br><div class="temp-etude">Etude:</div><br><div class="temp-review">Review&nbspPieces:</div><br><div class="temp-working-piece">Working&nbspPiece:</div><br><div class="temp-reading">Reading:</div>');
 
 
-    $('.temp-name').append(name);
-    $('.temp-date').append(date);
-    $('.temp-instrument').append(instrument);
+    $('.temp-name').append('<span class="inline-notes">' + name + '</span>');
+    $('.temp-date').append('<span class="inline-notes">' + date + '</span>');
+    $('.temp-instrument').append('<span class="inline-notes">' + instrument + '</span>');
     $('.temp-tonalization').append('<div class="temp-notes">' + tonalization + '</div>');
     $('.temp-scales').append('<div class="temp-notes">' + scales + '</div>');
     $('.temp-etude').append('<div class="temp-notes">' + etude + '</div>');

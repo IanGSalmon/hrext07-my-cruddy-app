@@ -60,7 +60,7 @@
 	display: flex;
 	flex-direction: row;
 	visibility: hidden;
-	margin-top: 2px;
+	margin-top: 10px;
 }
 
 .btn-dropdown-name {
@@ -74,6 +74,22 @@
 }
 
 .btn-del-item:hover, .btn-del-item:focus {
+	background-color: #2980B9;
+}
+
+.btn-update-item:hover, .btn-update-item:focus {
+	background-color: #2980B9;
+}
+
+.btn-update:hover, .btn-update:focus {
+	background-color: #2980B9;
+}
+
+.btn-delete:hover, .btn-delete:focus {
+	background-color: #2980B9;
+}
+
+.btn-return-to-large-view:hover, .btn-return-to-large-view:focus {
 	background-color: #2980B9;
 }
 
@@ -153,26 +169,6 @@
 }
 
 
-/*.btn-cancel-note {
-	display: flex;
-	margin-top: 35px;
-	border-radius: 3px;
-	height: 300px;
-}
-
-.btn-confirm-cancel {
-	display:flex;
-	visibility: hidden;
-	align-self: flex-start;
-	margin-top: 3px;
-	border: 2px solid;
-	background-color: rgba(0,210,255,1.0);
-	font-size: 18px;
-	height: 50px;
-	width: 103px;
-}*/
-
-
 .submission-area {
 	display: flex;
 	justify-content: center;
@@ -246,6 +242,7 @@
 .temp-name, .temp-date, .temp-instrument, .temp-tonalization, .temp-scales, .temp-etude,
 .temp-review, .temp-working-piece, .temp-reading {
 	font-family: Coronetscript, cursive;
+	font-size: 20px;
 	font-weight: 949;
 
 }
@@ -253,6 +250,7 @@
 .inline-notes, .temp-notes {
 	font-family: Coronetscript, cursive;
 	font-weight: 300;
+	font-size: 16px;
 
 }
 
@@ -279,6 +277,61 @@ input {
 .display-data-item {
 	/*font-weight: 550;*/
 }
+
+.container-large-view-data {
+	display: grid;
+	font-family: "Lucida Console";
+	margin-top: 5px;
+	margin-left: 5px;
+	grid-template-rows: 60px repeat(7, 40px);
+	grid-template-columns: repeat(8, auto);
+	align-content: space-around;
+}
+
+.container-large-view-btns {
+	margin-top: 5px;
+	margin-left: 5px;
+	height: 25px;
+}
+
+.display-data-name {
+	margin-top: 5px;
+	margin-left: 5px;
+	font-family: "Lucida Console", Monaco, monospace;
+}
+
+/*.item-a {
+  grid-column: 1 / 5;
+  grid-row: 1 / 6;
+}
+.item-b {
+  grid-column: 2 / 5;
+  grid-row: 1 / 6;
+}
+.item-c {
+  grid-column: 3 / 5;
+  grid-row: 1 / 6;
+}
+.item-d {
+  grid-column: 4 / 5;
+  grid-row: 1 / 6;
+}
+.item-e {
+  grid-column: 5 / 5;
+  grid-row: 1 / 6;
+}
+.item-f{
+  grid-column: 1 / 5;
+  grid-row: 2 / 6;
+}
+.item-g {
+  grid-column: 1 / 5;
+  grid-row: 3 / 6;
+}
+.item-h {
+  grid-column: 1 / 5;
+  grid-row: 4 / 6;
+}*/
 
 
 
