@@ -1,17 +1,9 @@
-/*
-Init app
-interact with DOM
-interact with localstorage
-
- */
-
 $(document).ready(function(){
 
   var deleteLesson = function(key, date) {
     var copyNotesObj = JSON.parse(localStorage[key]);
     delete copyNotesObj[date];
     localStorage.setItem(key, JSON.stringify(copyNotesObj));
-    // createView(null, key);
   }
 
   var createDropdownButtons = function() {
@@ -22,19 +14,6 @@ $(document).ready(function(){
       }
     })
   }
-
-  // var createView = function(event, keyData, displayText) {
-  //   var keyData = keyData || event.innerText;
-  //   var displayText = displayText || JSON.parse(localStorage.getItem(keyData));
-
-  //   $('.notes-data').html('');
-  //   $('.notes-data').append('<div class="display-data-name">' + keyData + '</div><br>');
-
-  //   Object.keys(displayText).forEach(key => {
-  //     $('.notes-data').append('<div class="display-data-item">' + key + JSON.stringify(displayText[key]) + '</div>');
-  //   })
-  //   $('.notes-data').append('<br><button class="btn-update">Update</button>&nbsp<button class="btn-delete">Delete</button>');
-  // }
 
   var createLargeView = function(event, keyData) {
     var keyData = keyData || event.innerText;
@@ -83,15 +62,12 @@ $(document).ready(function(){
     Object.keys(displayText).forEach(key => {
       $('.container-large-view-data').append('<div class="display-data-item"><button class="btn-update-item">Update</button>&nbsp' + key + '&nbsp&nbsp</div>');
       $('.container-large-view-data').append('<p class="display-data-details"><i>Instrument:</i>&nbsp' + displayText[key]["instrument"] + ',&nbsp&nbsp<i>Tonalization:</i>&nbsp' + displayText[key]["tonalization"] +',&nbsp&nbsp<i>Scales:</i>&nbsp' + displayText[key]["scales"] + ',&nbsp&nbsp<i>Etude:</i>&nbsp' + displayText[key]["etude"] +',&nbsp&nbsp<i>Review Pieces:</i>&nbsp' + displayText[key]["review pieces"] + ',&nbsp&nbsp<i>Working Piece:</i>&nbsp' + displayText[key]["working piece"] +',&nbsp&nbsp<i>Reading:</i>&nbsp' + displayText[key]["reading"])
-
     })
     $('.container-large-view-data').append('<div><br><button class="btn-return-to-large-view">Cancel</button>');
   }
 
   var createUpdateForm = function() {
     $('.container-workspace').prepend('<div class="container-notes"><div class="container-notes-title"></div><div class="container-form">Name:&nbsp<input type="text" class="input-name" value="' + arguments[0] + '">Date:&nbsp<input type="text" class="input-date" value="' + arguments[1] + '">Instrument:&nbsp<input type="text" class="input-instrument" placeholder="instrument"><br>Tonalization:&nbsp<input type="text" class="input-tonalization" placeholder="tonalization">Scales:&nbsp<input type="text" class="input-scales" placeholder="scales">Etude:&nbsp<input type="text" class="input-etude" placeholder="etude">Review&nbspPieces:&nbsp<input type="text" class="input-review" placeholder="review pieces">Working&nbspPiece:&nbsp<input type="text" class="input-working-piece" placeholder="working piece">Reading:&nbsp<input type="text" class="input-reading" placeholder="reading"></div><div class="form-btns"><button class="btn-save">Save</button><button class="btn-cancel-note">Cancel this note</button><button class="btn-confirm-cancel">Are you sure?</button></div>');
-
-    // $('.container-workspace').prepend('<div class="container-notes"><div class="container-notes-title"></div><div class="container-form"><input type="text" class="input-name" value="' + arguments[0] + '"><input type="text" class="input-date" value="' + arguments[1] + '"><input type="text" class="input-instrument" placeholder="instrument"><br><input type="text" class="input-tonalization" placeholder="tonalization"><input type="text" class="input-scales" placeholder="scales"><input type="text" class="input-etude" placeholder="etude"><input type="text" class="input-review" placeholder="review pieces"><input type="text" class="input-working-piece" placeholder="working piece"><input type="text" class="input-reading" placeholder="reading"><br><button class="btn-save">Save</button><button class="btn-cancel-note">Cancel this note</button></div><button class="btn-confirm-cancel">Are you sure?</button></div>');
   }
 
   var createLessonForm = function() {
@@ -154,13 +130,11 @@ $(document).ready(function(){
     $('.temp-working-piece').append('<div class="temp-notes">' + workingPiece + '</div>');
     $('.temp-reading').append('<div class="temp-notes">' + reading + '</div>');
 
-
     $('.notes-data').append('<br><div class="submission-area"></div>');
     $('.submission-area').append('<span class="warning-submit">WARNING:&nbsp <br> Note is not fully saved until you click "submit"!</span><button class="btn-add">Submit</button>');
   }
 
   var writeTempToView = function() {
-    // $('.notes-data').append(localStorage.temp);
     var name = $('.input-name').val();
     var date = $('.input-date').val();
     var tempObj = JSON.parse(localStorage.temp);
@@ -174,16 +148,8 @@ $(document).ready(function(){
     var workingPiece = tempObj[date]["working piece"];
     var reading = tempObj[date]["reading"];
 
-    // console.log(instrument);
-    // console.log(tonalization);
-    // console.log(scales);
-    // console.log(etude);
-    // console.log(reviewPieces);
-    // console.log(workingPiece);
-    // console.log(reading);
     $('.notes-data').text('');
     $('.notes-data').append('<div class="temp-name">Name:&nbsp</div><div class="temp-date">Date:&nbsp</div><div class="temp-instrument">Instrument:&nbsp</div><br><div class="temp-tonalization">Tonalization:</div><br><div class="temp-scales">Scales:</div><br><div class="temp-etude">Etude:</div><br><div class="temp-review">Review&nbspPieces:</div><br><div class="temp-working-piece">Working&nbspPiece:</div><br><div class="temp-reading">Reading:</div>');
-  
 
     $('.temp-name').append('<span class="inline-notes">' + name + '</span>');
     $('.temp-date').append('<span class="inline-notes">' + date + '</span>');
@@ -194,7 +160,6 @@ $(document).ready(function(){
     $('.temp-review').append('<div class="temp-notes">' + reviewPieces + '</div>');
     $('.temp-working-piece').append('<div class="temp-notes">' + workingPiece + '</div>');
     $('.temp-reading').append('<div class="temp-notes">' + reading + '</div>');
-
 
     $('.notes-data').append('<br><div class="submission-area"></div>');
     $('.submission-area').append('WARNING: Note is not fully saved until you click "submit"!<button class="btn-add">Submit</button>');
@@ -207,6 +172,7 @@ $(document).ready(function(){
     createInstructionsView();
     addDividerBegin();
     createLessonForm();
+    createTempSaveObject();
     $('.notes-data').html('');
     $('.notes-data').append('<div class="temp-name">Name:&nbsp</div><div class="temp-date">Date:&nbsp</div><div class="temp-instrument">Instrument:&nbsp</div><br><div class="temp-tonalization">Tonalization:</div><br><div class="temp-scales">Scales:</div><br><div class="temp-etude">Etude:</div><br><div class="temp-review">Review&nbspPieces:</div><br><div class="temp-working-piece">Working&nbspPiece:</div><br><div class="temp-reading">Reading:</div>');
 
@@ -220,6 +186,22 @@ $(document).ready(function(){
     localStorage.setItem('temp', JSON.stringify(tempObj));
   }
 
+  var hasText = function(selector, key) {
+    var date = $('.input-date').val();
+    var tempObj = JSON.parse(localStorage.temp);
+    if (selector.val().length) {
+      return selector.val();
+    }
+
+    if (tempObj.hasOwnProperty(date)) {
+      var oldNote = tempObj[date];
+      var oldVal = oldNote[key];
+      return oldVal;
+    } else {
+      return '';
+    }
+
+  }
 
   $(".btn-view-student").on('click', function() {
     if ($(".container-select-student").css("visibility") === "hidden") {
@@ -239,11 +221,6 @@ $(document).ready(function(){
     }
   })
 
-  // $('.container-main').on('click', '.btn-back-to-notes', function(e) {
-  //   var keyData = $('.display-data-name').text().slice(9);
-  //   createView(null, keyData);
-  // })
-
   $('.container-main').on('click', '.btn-dropdown-name', function(e) {
     var student = e.currentTarget;
     createLargeView(student);
@@ -260,14 +237,8 @@ $(document).ready(function(){
 
   $('.container-main').on('click', '.btn-update-item', function(e) {
     var name = $('.display-data-name').text();
-
     var splitText = $(this).parent().text().split(/\s{1}/);
-    console.log(splitText);
     var date = splitText[1] + ' ' + splitText[2];
-    // var currObj = JSON.parse(splitText[4]);
-    // var currValues = [];
-    // Object.keys(currObj).forEach(key => currValues.push(currObj[key]))
-    // console.log(currValues);
 
     $('.container-workspace').html('');
     createInstructionsView();
@@ -285,24 +256,6 @@ $(document).ready(function(){
   $('.container-main').on('click', '.btn-delete', function(e) {
     createLargeViewDeleteBtns();
   })
-
-  var hasText = function(selector, key) {
-    var date = $('.input-date').val();
-    var tempObj = JSON.parse(localStorage.temp);
-    if (selector.val().length) {
-      return selector.val();
-    }
-
-    if (tempObj.hasOwnProperty(date)) {
-
-      var oldNote = tempObj[date];
-      var oldVal = oldNote[key];
-      return oldVal;
-    } else {
-      return '';
-    }
-
-  }
 
   $('.container-main').on('click', '.btn-save', function(e) {
     var keyTemp = 'temp';
@@ -356,8 +309,7 @@ $(document).ready(function(){
       $('.btn-confirm-cancel').css('visibility', 'visible');
     } else {
       $('.btn-confirm-cancel').css('visibility', 'hidden');
-    }
-    
+    } 
 
   })
 
@@ -374,6 +326,5 @@ $(document).ready(function(){
   createInstructionsView();
   createDropdownButtons();
   createTempSaveObject();
-
 
 });
