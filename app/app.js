@@ -116,7 +116,7 @@ $(document).ready(function(){
 
   var createInstructionsView = function() {
     $('.container-workspace').html('');
-    $('.container-workspace').append('<div class="container-view-notes"><div class="notes-data"><div class="text-instructions">Select "View Student" or "Take Notes" to begin!</div></div></div>');
+    $('.container-workspace').append('<div class="container-view-notes"><div class="notes-data"><div class="text-instructions">Select "View Student" or "Take Notes" to begin!&nbsp&nbsp&nbsp&nbsp</div></div></div>');
   }
 
   var addDividerEnd = function() {
@@ -159,7 +159,7 @@ $(document).ready(function(){
     $('.temp-reading').append('<div class="temp-notes">' + reading + '</div>');
 
     $('.notes-data').append('<br><div class="submission-area"></div>');
-    $('.submission-area').append('<span class="warning-submit">WARNING:&nbsp <br> Note is not fully saved until you click "submit"!</span><button class="btn-add">Submit</button>');
+    $('.submission-area').append('<span class="warning-submit">WARNING:&nbsp <br> Note is not fully saved until you click "submit"!</span><br><button class="btn-add">Submit</button>');
   }
 
   var writeTempToView = function() {
@@ -190,7 +190,7 @@ $(document).ready(function(){
     $('.temp-reading').append('<div class="temp-notes">' + reading + '</div>');
 
     $('.notes-data').append('<br><div class="submission-area"></div>');
-    $('.submission-area').append('WARNING: Note is not fully saved until you click "submit"!<button class="btn-add">Submit</button>');
+    $('.submission-area').append('WARNING::&nbsp <br> Note is not fully saved until you click "submit"!<br><button class="btn-add">Submit</button>');
   }
 
   $(".btn-take-notes").on('click', function() {

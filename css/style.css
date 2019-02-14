@@ -1,3 +1,7 @@
+/*.container-main {
+	background-color: rgba(0,210,255,0.01);
+}*/
+
 .container-title {
 	display: flex;
 	justify-content: center;
@@ -12,7 +16,7 @@
 .container-view-or-take {
 	display: flex;
 	justify-content: center;
-	margin-top: 20px;
+	margin-top: 10px;
 }
 
 .divider {
@@ -26,7 +30,8 @@
 	padding: 12px 12px;
 	font-size: 24px;
 	border-radius: 20px;
-	background-color: rgba(0,210,255,1.0);
+	background-color: rgba(0,210,255,0.7);
+	font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
 }
 
 .btn-take-notes {
@@ -34,7 +39,8 @@
 	padding: 12px 12px;
 	font-size: 24px;
 	border-radius: 20px;
-	background-color: rgba(0,210,255,1.0);
+	background-color: rgba(0,210,255,0.7);
+	font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
 }
 
 .container-select-student {
@@ -43,16 +49,26 @@
 	justify-content: center;
 	align-items: center;
 	flex-direction: column;
-	margin-top: 20px;
+	margin-top: 10px;
 }
 
 .btn-select-student {
+	margin-top: 5px;
 	width: 200px;
-	padding: 5px 5px;
-	font-size: 22px;
+	border-radius: 5px;
+	font-size: 18px;
+	background-color: rgba(0,210,255,0.2);
 }
 
 .btn-select-student:hover, .btn-select-student:focus {
+	background-color: #2980B9;
+}
+
+.btn-save:hover, .btn-save:focus {
+	background-color: #2980B9;
+}
+
+.btn-cancel-note:hover, .btn-cancel-note:focus {
 	background-color: #2980B9;
 }
 
@@ -67,6 +83,18 @@
 	display: flex;
 	font-size: 18px;
 	border-radius: 3px;
+}
+
+.btn-update, .btn-delete {
+	font-size: 12px;
+	width: 70px;
+	height: 30px;
+	border-radius: 5px;
+}
+
+.btn-update-item, .btn-delete-item {
+	height: 24px;
+	border-radius: 4px;
 }
 
 .btn-dropdown-name:hover, .btn-dropdown-name:focus {
@@ -93,6 +121,22 @@
 	background-color: #2980B9;
 }
 
+.btn-add {
+	width: 70px;
+	height: 30px;
+	border-radius: 5px;
+	margin-top: 10px;
+}
+
+.title {
+/*	width: 250px;
+	padding: 12px 12px;*/
+	font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+/*	font-size: 24px;*/
+	border-radius: 20px;
+	background-color: rgba(0,210,255,0.9);
+}
+
 .show-students {display:block;}
 
 .container-workspace {
@@ -105,7 +149,7 @@
 	display: flex;
 	flex-direction: column;
 /*	margin-left: 200px;*/
-	height: 600px;
+	height: 650px;
 	width: 500px;
 	border: solid 3px;
 	border-radius: 5px;
@@ -114,11 +158,11 @@
 .container-notes {
 	display: flex;
 	flex-direction: column;
-	height: 600px;
+	height: 650px;
 	width: 700px;
 	border: solid 3px;
 	border-radius: 5px;
-	background-color: rgba(0,210,255, 0.2);
+	background-color: rgba(0,210,255, 0.1);
 }
 
 .container-notes-title {
@@ -132,7 +176,7 @@
 	margin-top: 5px;
 	margin-left: 3px;
 	width: 100px;
-	font-family: "Lucida Console", Monaco, monospace;
+	font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif
 }
 
 .delete-warning {
@@ -147,18 +191,21 @@
 	flex-direction: row;
 	margin-left: 10px;
 	margin-bottom: 5px;
+	border-radius: 3px;
 }
 
 .btn-save {
 	width: 200px;
 	height: 25px;
 	margin-right: 3px;
+	border-radius: 3px;
 }
 
 .btn-cancel-note {
 	width: 200px;
 	height: 25px;
 	margin-right: 3px;
+	border-radius: 3px;
 }
 
 .btn-confirm-cancel {
@@ -166,6 +213,7 @@
 	width: 200px;
 	height: 25px;
 	background-color: rgba(255, 0, 0, 0.6);
+	border-radius: 3px;
 }
 
 
@@ -175,13 +223,14 @@
 	flex-direction: column;
 	align-items: center;
 	font-family: "Lucida Console", Monaco, monospace;
+	font-size: 12px;
 }
 
 .display-large-view {
 	display: flex;
 	justify-content: flex-start;
 	flex-direction: column;
-	background-color: rgba(0,210,255,0.2);
+	background-color: rgba(0,210,255,0.1);
 	border: solid 2px;
 	width: 1200px;
 }
@@ -236,7 +285,8 @@
 	display: flex;
 	justify-content: center;
 	margin-top: 30px;
-	font-family: "Lucida Console", Monaco, monospace;
+	font-size: 20px;
+	font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif
 }
 
 .temp-name, .temp-date, .temp-instrument, .temp-tonalization, .temp-scales, .temp-etude,
@@ -256,22 +306,26 @@
 
 .notes-data {
 	margin-top: 3px;
-	margin-left: 5px;
+	margin-left: 3px;
 
 }
 
 .container-view-notes {
-	background-color: rgba(0,210,255, 0.2);
+	background-color: rgba(0,210,255, 0.1);
 }
 
 
 
 input {
-		background-color: #e5faff;
+		background-color: rgba(224,255,255, 0.4);
 		margin-bottom: 2px;
-		border-radius: 2px;
+		border-radius: 5px;
 		border: 0.25px solid;
 		height: 30px;
+}
+
+input:hover {
+	background-color: rgba(0,210,255, 0.6);
 }
 
 .display-data-item {
