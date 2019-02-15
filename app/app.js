@@ -44,16 +44,7 @@ $(document).ready(function(){
       Object.keys(currLessonData).forEach(item => {
         $('.container-large-view-data').append('<span>' + currLessonData[item] + '</span>')
       })
-      // $('.container-large-view-data').append('<p class="display-data-details"><i>Instrument:</i>&nbsp' + displayText[key]["instrument"] + ',&nbsp&nbsp<i>Tonalization:</i>&nbsp' + displayText[key]["tonalization"] +',&nbsp&nbsp<i>Scales:</i>&nbsp' + displayText[key]["scales"] + ',&nbsp&nbsp<i>Etude:</i>&nbsp' + displayText[key]["etude"] +',&nbsp&nbsp<i>Review Pieces:</i>&nbsp' + displayText[key]["review pieces"] + ',&nbsp&nbsp<i>Working Piece:</i>&nbsp' + displayText[key]["working piece"] +',&nbsp&nbsp<i>Reading:</i>&nbsp' + displayText[key]["reading"]);
-
     })
-    
-   
-   
-   
-   
-   
-     
   }
 
   var createLargeViewDeleteBtns = function(event) {
@@ -217,6 +208,7 @@ $(document).ready(function(){
   var hasText = function(selector, key) {
     var date = $('.input-date').val();
     var tempObj = JSON.parse(localStorage.temp);
+    
     if (selector.val().length) {
       return selector.val();
     }
@@ -228,7 +220,6 @@ $(document).ready(function(){
     } else {
       return '';
     }
-
   }
 
   $(".btn-view-student").on('click', function() {
@@ -325,6 +316,8 @@ $(document).ready(function(){
     clearForm();
     $('.notes-data').html('');
     createDropdownButtons();
+    $('.container-view-notes').append('<div><font color="green">Success!</font></div>')
+
   });
 
   $('.container-main').on('click', '.btn-clear', function(){
@@ -338,7 +331,6 @@ $(document).ready(function(){
     } else {
       $('.btn-confirm-cancel').css('visibility', 'hidden');
     } 
-
   })
 
   $('.container-main').on('click', '.btn-confirm-cancel', function(e) {

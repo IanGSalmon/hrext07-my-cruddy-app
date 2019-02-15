@@ -354,6 +354,11 @@ input:hover {
 	font-family: "Lucida Console", Monaco, monospace;
 }
 
+.success {
+	display: flex;
+	align-self: center;
+}
+
 /*.item-a {
   grid-column: 1 / 5;
   grid-row: 1 / 6;
